@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Kecamatan;
+use App\Kelurahan;
 use DataTables;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->except('edit', 'update');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index');
+        return view('admin.user.index');
     }
 
     /**
@@ -25,7 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.add');
+        $kec = Kecamatan::get();
+        return view('admin.user.add', compact('kec'));
     }
 
     /**
@@ -40,24 +48,29 @@ class UserController extends Controller
             'nama' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required',
+            'kelurahan_id' => 'required',
         ]);
         $input = $request->except('password');
         $input['password'] = bcrypt($request->password);
         $input['level'] = '2';
-        $input['kelurahan_id'] = '1';
         User::create($input);
         return redirect()->route('user.index');
     }
 
     /**
      * Display the specified resource.
-     *
+     * Get Data Kelurahan 
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function show($id)
     {
-        //
+        $data = Kelurahan::where('kecamatan_id', $id)->get();
+        $return = '<option>Pilih Kelurahan</option>';
+        foreach($data as $kel){
+            $return .= "<option value='$kel->id'>$kel->kelurahan</option>";
+        }
+        return $return;
     }
 
     /**
@@ -70,7 +83,8 @@ class UserController extends Controller
     {
         $data = User::findOrFail($id);
         // $pass = Hash::
-        return view('user.edit', compact('data'));
+        $kec = Kecamatan::get();
+        return view('admin.user.edit', compact('data', 'kec'));
     }
 
     /**

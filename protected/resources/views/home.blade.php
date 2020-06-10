@@ -12,7 +12,7 @@
         <li class="active">Dashboard</li>
       </ol>
     </section>
-
+  @if(Auth::user()->level == 1)
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
@@ -21,7 +21,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3>{{ $admin }}</h3>
 
               <p>Admin Kelurahan</p>
             </div>
@@ -36,7 +36,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53</h3>
+              <h3>{{ $kec }}</h3>
 
               <p>Kecamatan</p>
             </div>
@@ -51,7 +51,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{ $kel }}</h3>
 
               <p>Kelurahan</p>
             </div>
@@ -66,7 +66,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3>{{ $penduduk }}</h3>
 
               <p>Total Penduduk</p>
             </div>
@@ -82,4 +82,75 @@
 
     </section>
     <!-- /.content -->
+    @else
+     <!-- Main content -->
+     <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{ $penduduk }}</h3>
+
+              <p>Penduduk Total</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ $perempuan }}</h3>
+
+              <p>Penduduk Perempuan</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-female"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{ $pria }}</h3>
+
+              <p>Penduduk Laki-laki</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-male"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{ $anak }}</h3>
+
+              <p>Penduduk Di Bawah 17 tahun</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-child"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+    @endif
 @endsection

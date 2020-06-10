@@ -32,11 +32,11 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><img src="{{ asset('assets/dist/img/logo.png') }}" alt="Logo Image" width="150" height="150"></a>
+    <a href="#"><img src="{{ asset('assets/dist/img/sik.png') }}" alt="Logo Image" width="350" height="220"></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg"><b>Sistem Informasi Kelurahan</b></p>
+    <p class="login-box-msg"><b>Login</b></p>
 
     <form method="POST" action="{{ route('login') }}">
       @csrf

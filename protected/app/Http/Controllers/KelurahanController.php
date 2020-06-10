@@ -11,6 +11,11 @@ use DataTables;
 
 class KelurahanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,7 @@ class KelurahanController extends Controller
      */
     public function index()
     {
-        return view('kelurahan.index');
+        return view('admin.kelurahan.index');
     }
 
     /**
@@ -29,7 +34,7 @@ class KelurahanController extends Controller
     public function create()
     {
         $data = Kecamatan::all();
-        return view('kelurahan.add', compact('data'))
+        return view('admin.kelurahan.add', compact('data'));
     }
 
     /**
@@ -40,7 +45,18 @@ class KelurahanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kecamatan_id' => 'required',
+            'kelurahan' => 'required',
+            'kode_pos' => 'required',
+            'alamat_kantor' => 'required',
+            'email' => 'required|unique:tbl_kelurahan',
+            'website' => 'required',
+            'no_telp' => 'required|unique:tbl_kelurahan'
+        ]);
+        $input = $request->all();
+        Kelurahan::create($input);
+        return redirect()->route('kelurahan.index');
     }
 
     /**
@@ -62,7 +78,9 @@ class KelurahanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Kelurahan::findOrFail($id);
+        $a = Kecamatan::all();
+        return view('admin.kelurahan.edit', compact('data', 'a'));
     }
 
     /**
@@ -74,7 +92,19 @@ class KelurahanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Kelurahan::findOrFail($id);
+        $this->validate($request, [
+            'kecamatan_id' => 'required',
+            'kelurahan' => 'required',
+            'kode_pos' => 'required',
+            'alamat_kantor' => 'required',
+            'email' => 'required|unique:tbl_kelurahan,email,' . $id,
+            'website' => 'required',
+            'no_telp' => 'required|unique:tbl_kelurahan,no_telp,' . $id,
+        ]);
+        $input = $request->all();
+        $data->update($input);
+        return redirect()->route('kelurahan.index');
     }
 
     /**
@@ -85,7 +115,9 @@ class KelurahanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Kelurahan::findOrFail($id);
+        $data->delete();
+        return redirect()->route('kelurahan.index');
     }
 
     public function datatable()

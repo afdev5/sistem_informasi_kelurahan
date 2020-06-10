@@ -28,4 +28,14 @@ class Kelurahan extends Model
     {
         return $this->hasMany(User::class, 'kelurahan_id');
     }
+
+    public function info_kelurahan()
+    {
+        return $this->hasOne(InfoKelurahan::class, 'kelurahan_id');
+    }
+
+    public function kegiatan_kelurahan()
+    {
+        return $this->hasMany(KegiatanKelurahan::class, 'kelurahan_id');
+    }
 }

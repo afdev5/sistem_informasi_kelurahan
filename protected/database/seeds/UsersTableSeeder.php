@@ -12,11 +12,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $users = [
-        	['nama' => 'Super Admin',
-             'email' => 'superadmin@mail.com', 
-             'password' => bcrypt('superadmin'), 
+        	['nama' => 'Admin Kominfo',
+             'email' => 'admin@tomohon.go.id', 
+             'password' => bcrypt('admin'), 
              'level' => '1',
-             'kelurahan_id' => '1'
             ],
         ];
 

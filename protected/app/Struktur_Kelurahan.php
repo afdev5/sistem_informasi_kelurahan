@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Struktur_Kelurahan extends Model
 {
     protected $table = 'tbl_struktur_kelurahan';
-    protected $fillable = ['kelurahan_id', 'jabatan', 'nama_pegawai', 'nip_pegawai', 'jenis_kelamin', 'agama', 'masa_jabatan'];
+    protected $fillable = ['kelurahan_id', 'nama_pegawai', 'nip_pegawai', 'jenis_kelamin', 'agama', 'level_jabatan', 'gambar'];
 
     public function kelurahan()
     {

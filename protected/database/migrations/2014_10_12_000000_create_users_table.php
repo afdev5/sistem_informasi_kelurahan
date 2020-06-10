@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('level', ['1','2']); // 1. SuperAdmin 2.Admin Kelurahan
             $table->integer('kelurahan_id')->unsigned()->nullable();
-            $table->foreign('kelurahan_id')->references('id')->on('tbl_kecamatan')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('kelurahan_id')->references('id')->on('tbl_kelurahan')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

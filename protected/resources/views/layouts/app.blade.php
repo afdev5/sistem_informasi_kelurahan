@@ -80,10 +80,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ route('user.edit', Auth::user()->id) }}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                     @guest  
+                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
@@ -137,7 +137,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-map"></i> Kecamatan</a></li>
+            <li><a href="{{ route('kecamatan.index') }}"><i class="fa fa-map"></i> Kecamatan</a></li>
             <li><a href="{{ route('kelurahan.index') }}"><i class="fa fa-map-o"></i> Kelurahan</a></li>
             <li><a href="{{ route('user.index') }}"><i class="ion ion-person"></i> Admin Kelurahan</a></li>
           </ul>
@@ -151,12 +151,41 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-newspaper-o"></i> Profil Kelurahan</a></li>
-            <li><a href="#"><i class="fa fa-object-ungroup"></i> Struktur Jabatan</a></li>
+            <li><a href="{{ route('profile_kelurahan.index') }}"><i class="fa fa-newspaper-o"></i> Profil Kelurahan</a></li>
+            <li><a href="{{ route('struktur_kelurahan.index') }}"><i class="fa fa-sitemap"></i> Struktur Jabatan</a></li>
+            <li><a href="{{ route('info_kelurahan.index') }}"><i class="fa fa-info-circle"></i> Informasi Kelurahan</a></li>
+            <li><a href="{{ route('kegiatan_kelurahan.index') }}"><i class="fa fa-file-photo-o"></i> Kegiatan Kelurahan</a></li>
+            <li><a href="{{ route('wilayah.index') }}"><i class="fa fa-sticky-note-o"></i> Batas Wilayah Kelurahan</a></li>
           </ul>
         </li>
         @endif
-        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Penduduk</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li><a href="{{ route('penduduk.index') }}"><i class="fa fa-users"></i> Data Penduduk</a></li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-map-o"></i> <span>Statistik Penduduk</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{ route('statistik.pendidikan') }}"><i class="fa fa-circle"></i> Pendidikan</a></li>
+              <li><a href="{{ route('statistik.agama') }}"><i class="fa fa-circle"></i> Agama</a></li>
+              <li><a href="{{ route('statistik.usia') }}"><i class="fa fa-circle"></i> Umur</a></li>
+              <li><a href="{{ route('statistik.jk') }}"><i class="fa fa-circle"></i> Jenis Kelamin</a></li>
+              <li><a href="{{ route('statistik.kawin') }}"><i class="fa fa-circle"></i> Status Perkawinan</a></li>
+            </ul>
+          </li>
+          </ul>
+        </li>
+
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -171,14 +200,14 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2019 <a href="https://tomohon.go.id">Dinas Komunikasi Dan Informatika Kota Tomohon</a>.</strong> All rights
+    <strong>Copyright &copy; KKN UNIMA 'TI' 2019 -<a href="https://tomohon.go.id"> Dinas Komunikasi Dan Informatika Kota Tomohon</a>.</strong> All rights
     reserved.
   </footer>
 
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <!-- <div class="control-sidebar-bg"></div> -->
-</div>
+  </div>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
@@ -199,6 +228,8 @@
 <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+<script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('assets/chart.js/Chart.js') }}"></script>
 @yield('js')
 </body>
 </html>
